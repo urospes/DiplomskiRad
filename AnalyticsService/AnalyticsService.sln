@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsService", "AnalyticsService\AnalyticsService.csproj", "{D791361B-D05F-4D37-9122-EE189C26FED3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{3ECC6F0F-F8AE-4CBC-9B4B-B55CF6D9CE18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D791361B-D05F-4D37-9122-EE189C26FED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D791361B-D05F-4D37-9122-EE189C26FED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D791361B-D05F-4D37-9122-EE189C26FED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D791361B-D05F-4D37-9122-EE189C26FED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ECC6F0F-F8AE-4CBC-9B4B-B55CF6D9CE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ECC6F0F-F8AE-4CBC-9B4B-B55CF6D9CE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ECC6F0F-F8AE-4CBC-9B4B-B55CF6D9CE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ECC6F0F-F8AE-4CBC-9B4B-B55CF6D9CE18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
