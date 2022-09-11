@@ -35,9 +35,7 @@ metadata:
 spec:
   selector:
     app: mosquitto
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 1883
       targetPort: 1883
-      nodePort: 30001
