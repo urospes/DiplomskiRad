@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: analytics-deployment
+  name: kafka-bridge-deployment
   labels:
-    app: analytics
+    app: kafka-bridge
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: analytics
+      app: kafka-bridge
   template:
     metadata:
       labels:
-        app: analytics
+        app: kafka-bridge
     spec:
       containers:
-      - name: analytics
-        image: urospes/analytics_service:latest
+      - name: kafka-bridge
+        image: urospes/kafka_bridge_service:latest
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: analytics-service
+  name: kafka-bridge-service
 spec:
   selector:
-    app: analytics
+    app: kafka-bridge
   ports:
     - protocol: TCP
       port: 80

@@ -6,12 +6,16 @@ using DataClasses;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-await MqttHelper.SubscribeToTopic("mosquitto-service", 1883, "topic", (e) => {
+const string SENSOR_DATA_MQTT_TOPIC = "sensor_data_topic";
+const string KAFKA_DATA_TOPIC = "mqtt_data";
+
+await MqttHelper.SubscribeToTopic("mosquitto-service", 1883, SENSOR_DATA_MQTT_TOPIC, (e) => {
     var recordAsString = Encoding.ASCII.GetString(e.ApplicationMessage.Payload);
     var record = JsonConvert.DeserializeObject<DataRecord>(recordAsString);
     if(record != null)
     {
         Console.WriteLine(record.Speed);
+        KafkaHelper.Produce(KAFKA_DATA_TOPIC, "Speed", record.Speed.ToString());
     }
     return Task.CompletedTask;
 });

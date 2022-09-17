@@ -1,11 +1,12 @@
 using CsvHelper;
 using System.Globalization;
-using Utils;
 using Newtonsoft.Json;
 
 public static class DataGen 
 {
     private static int INTERVAL_MS = 1000;
+    private static string SENSOR_DATA_TOPIC = "sensor_data_topic";
+    private static string MQTT_URL = "my-mosquitto.com";
 
     public static async Task StartDataGen()
     {
@@ -27,7 +28,7 @@ public static class DataGen
                     if(record != null)
                     {
                         var recordAsString = JsonConvert.SerializeObject(record);
-                        await MqttHelper.PublishToTopic("my-mosquitto.com", 1883, "topic", recordAsString);
+                        await MqttHelper.PublishToTopic(MQTT_URL, 1883, SENSOR_DATA_TOPIC, recordAsString);
                     }
                 }
             }
