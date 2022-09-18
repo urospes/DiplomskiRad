@@ -1,19 +1,11 @@
 using Confluent.Kafka;
+using Confluent.Kafka.Admin;
 
 namespace Utils;
 
 public static class KafkaHelper
 {
     private static readonly ProducerConfig _producerConfig = LoadProducerConfig();
-    private static readonly ConsumerConfig _consumerConfig = LoadConsumerConfig();
-
-    public static ConsumerConfig LoadConsumerConfig()
-    {
-        return new ConsumerConfig
-        {
-
-        };
-    }
 
     public static ProducerConfig LoadProducerConfig()
     {
@@ -26,14 +18,12 @@ public static class KafkaHelper
         };
     }
 
-
     public static void Produce(string topic, string key, string data)
     {
         using(var producer = new ProducerBuilder<string, string>(LoadProducerConfig()).Build())
         {
             Console.WriteLine("Producing a message...");
             producer.Produce(topic, new Message<string, string> {Key = key, Value = data}, handler);
-            Console.WriteLine("Flushing");
             producer.Flush();
         }
     }
@@ -47,6 +37,25 @@ public static class KafkaHelper
         else
         {
             Console.WriteLine("Message produced...");
+        }
+    }
+
+    public static async Task CreateTopic(string name, int numPartitions, short replicationFactor)
+    {
+        using (var adminClient = new AdminClientBuilder(LoadProducerConfig()).Build())
+        {
+            try
+            {
+                await adminClient.CreateTopicsAsync(new List<TopicSpecification> {
+                    new TopicSpecification { Name = name, NumPartitions = numPartitions, ReplicationFactor = replicationFactor } });
+            }
+            catch (CreateTopicsException e)
+            {
+                if (e.Results[0].Error.Code != ErrorCode.TopicAlreadyExists)
+                    Console.WriteLine($"An error occured creating topic {name}: {e.Results[0].Error.Reason}");
+                else
+                    Console.WriteLine("Topic already exists...");
+            }
         }
     }
 }
