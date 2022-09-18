@@ -21,10 +21,10 @@ public static class KafkaHelper
     public static void Consume(string topic)
     {
         CancellationTokenSource cts = new CancellationTokenSource();
-            Console.CancelKeyPress += (_, e) => {
-                e.Cancel = true; // prevent the process from terminating.
-                cts.Cancel();
-            };
+        Console.CancelKeyPress += (_, e) => {
+            e.Cancel = true;
+            cts.Cancel();
+        };
 
         using(var consumer = new ConsumerBuilder<string, string>(LoadConsumerConfig()).Build())
         {
@@ -35,6 +35,8 @@ public static class KafkaHelper
                 {
                     var cr = consumer.Consume(cts.Token);
                     Console.WriteLine($"Consumed record with value {cr.Message.Value}");
+                    //... handle consume
+                    
                 }
             }
             catch (OperationCanceledException)
