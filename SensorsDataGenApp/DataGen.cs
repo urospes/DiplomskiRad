@@ -6,7 +6,7 @@ public static class DataGen
 {
     private static int INTERVAL_MS = 1000;
     private static string SENSOR_DATA_TOPIC = "sensor_data_topic";
-    private static string MQTT_URL = "my-mosquitto.com";
+    private static string MQTT_URL = "app-mosquitto.com";
 
     public static async Task StartDataGen()
     {

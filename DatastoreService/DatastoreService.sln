@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatastoreService", "Datasto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{88D786FB-4BFF-4761-9F17-FE406F823C88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasurementClasses", "MeasurementClasses\MeasurementClasses.csproj", "{E1C9BC17-E09B-4A3C-A661-FF9B4C16BF62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{88D786FB-4BFF-4761-9F17-FE406F823C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88D786FB-4BFF-4761-9F17-FE406F823C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88D786FB-4BFF-4761-9F17-FE406F823C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C9BC17-E09B-4A3C-A661-FF9B4C16BF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C9BC17-E09B-4A3C-A661-FF9B4C16BF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C9BC17-E09B-4A3C-A661-FF9B4C16BF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C9BC17-E09B-4A3C-A661-FF9B4C16BF62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

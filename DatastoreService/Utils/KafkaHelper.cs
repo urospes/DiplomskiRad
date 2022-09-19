@@ -36,7 +36,8 @@ public static class KafkaHelper
                     var cr = consumer.Consume(cts.Token);
                     Console.WriteLine($"Consumed record with value {cr.Message.Value}");
                     //... handle consume
-                    
+                    Console.WriteLine("trying to write to influx");
+                    InfluxDBHelper.WriteToInflux(cr.Message.Value);
                 }
             }
             catch (OperationCanceledException)

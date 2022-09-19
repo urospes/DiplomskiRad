@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: influxdb-configmap
+data:
+  init-mode: setup
+  init-bucket: car_data
+  init-org: up_diplomski

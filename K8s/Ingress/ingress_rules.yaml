@@ -1,18 +1,37 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mosquitto-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: app-ingress
 spec:
   rules:
-    - host: my-mosquitto.com
+    - host: app-mosquitto.com
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: mosquitto-service
+                port:
+                  number: 1883
+    - host: app-grafana.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: mosquitto-service
+                name: grafana-service
                 port:
-                  number: 1883
+                  number: 3000
+    
+    - host: app-influx.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: influxdb
+                port:
+                  number: 8086
