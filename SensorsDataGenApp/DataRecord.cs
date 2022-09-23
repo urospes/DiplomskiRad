@@ -59,6 +59,8 @@ public class DataRecord
 
     [Name("failure_occurred")]
     public bool FailureOccurred { get; set; }
+
+    public string? CarId { get; set; }
 }
 
 public class DataRecordClassMap : ClassMap<DataRecord>

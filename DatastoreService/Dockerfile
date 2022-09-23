@@ -6,12 +6,14 @@ COPY *.sln .
 COPY DatastoreService/*.csproj ./DatastoreService/
 COPY Utils/*.csproj ./Utils/
 COPY MeasurementClasses/*.csproj ./MeasurementClasses/
+COPY DataClasses/*.csproj ./DataClasses/
 
 RUN dotnet restore
 
 COPY DatastoreService/. ./DatastoreService/
 COPY Utils/. ./Utils/
 COPY MeasurementClasses/. ./MeasurementClasses/
+COPY DataClasses/. ./DataClasses/
 
 WORKDIR /app/DatastoreService
 RUN dotnet publish -c Release -o out

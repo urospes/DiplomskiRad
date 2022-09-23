@@ -12,11 +12,9 @@ const string KAFKA_DATA_TOPIC = "mqtt_data";
 await KafkaHelper.CreateTopic(KAFKA_DATA_TOPIC, 1, 1);
 await MqttHelper.SubscribeToTopic("mosquitto-service", 1883, SENSOR_DATA_MQTT_TOPIC, (e) => {
     var recordAsString = Encoding.ASCII.GetString(e.ApplicationMessage.Payload);
-    var record = JsonConvert.DeserializeObject<DataRecord>(recordAsString);
-    if(record != null)
+    if(recordAsString != null && recordAsString.Length > 0)
     {
-        Console.WriteLine(record.Speed);
-        KafkaHelper.Produce(KAFKA_DATA_TOPIC, "Speed", record.Speed.ToString());
+        KafkaHelper.Produce(KAFKA_DATA_TOPIC, "Record emitted", recordAsString);
     }
     return Task.CompletedTask;
 });

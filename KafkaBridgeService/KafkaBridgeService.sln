@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaBridgeService", "Kafka
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{0B50B631-1012-487B-936B-69794D226474}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClasses", "DataClasses\DataClasses.csproj", "{8DEF3E62-2BE8-4A8D-8604-4E684A86700B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{0B50B631-1012-487B-936B-69794D226474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B50B631-1012-487B-936B-69794D226474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B50B631-1012-487B-936B-69794D226474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DEF3E62-2BE8-4A8D-8604-4E684A86700B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DEF3E62-2BE8-4A8D-8604-4E684A86700B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DEF3E62-2BE8-4A8D-8604-4E684A86700B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DEF3E62-2BE8-4A8D-8604-4E684A86700B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

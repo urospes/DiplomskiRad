@@ -1,6 +1,7 @@
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using MeasurementClasses;
+using DataClasses;
 
 namespace Utils;
 
@@ -11,7 +12,7 @@ public static class InfluxDBHelper
     private static readonly string ORG = "up_diplomski";
     private static readonly string URL = "http://influxdb-0.influxdb:8086";
 
-    public static void WriteToInflux(string data)
+    public static void WriteToInflux(DataRecord data)
         {
             try
             {
@@ -20,8 +21,8 @@ public static class InfluxDBHelper
                 {
                     var speedMeasurement = new SpeedMeasurement
                     {
-                        CarId = "1",
-                        Value = Convert.ToDouble(data)
+                        CarId = data.CarId,
+                        Value = data.Speed
                     };
                     writeApi.WriteMeasurement(speedMeasurement, WritePrecision.Ns, BUCKET, ORG);
                 }

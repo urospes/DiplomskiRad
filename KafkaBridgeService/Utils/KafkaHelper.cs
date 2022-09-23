@@ -1,5 +1,6 @@
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
+using DataClasses;
 
 namespace Utils;
 

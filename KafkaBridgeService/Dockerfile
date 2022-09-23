@@ -5,11 +5,13 @@ WORKDIR /app
 COPY *.sln .
 COPY KafkaBridgeService/*.csproj ./KafkaBridgeService/
 COPY Utils/*.csproj ./Utils/
+COPY DataClasses/*.csproj ./DataClasses/
 
 RUN dotnet restore
 
 COPY KafkaBridgeService/. ./KafkaBridgeService/
 COPY Utils/. ./Utils/
+COPY DataClasses/. ./DataClasses/
 
 WORKDIR /app/KafkaBridgeService
 RUN dotnet publish -c Release -o out

@@ -11,4 +11,8 @@
     <PackageReference Include="MQTTnet" Version="4.1.0.247" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
+  </ItemGroup>
+
 </Project>

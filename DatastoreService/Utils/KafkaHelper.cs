@@ -1,4 +1,6 @@
 using Confluent.Kafka;
+using DataClasses;
+using Newtonsoft.Json;
 
 namespace Utils;
 
@@ -33,16 +35,18 @@ public static class KafkaHelper
             {
                 while (true)
                 {
-                    var cr = consumer.Consume(cts.Token);
-                    Console.WriteLine($"Consumed record with value {cr.Message.Value}");
+                    var consumedEvent = consumer.Consume(cts.Token);
+                    Console.WriteLine($"Event with key {consumedEvent.Message.Key} consumed...");
                     //... handle consume
-                    Console.WriteLine("trying to write to influx");
-                    InfluxDBHelper.WriteToInflux(cr.Message.Value);
+                    Console.WriteLine("Trying to write to influx...");
+                    var record = JsonConvert.DeserializeObject<DataRecord>(consumedEvent.Message.Value);
+                    if(record != null)
+                        InfluxDBHelper.WriteToInflux(record);
                 }
             }
             catch (OperationCanceledException)
             {
-                Console.WriteLine("Closing consumer...");
+                Console.WriteLine("Operation cancelled. Closing consumer...");
             }
             finally
             {
