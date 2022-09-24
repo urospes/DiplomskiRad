@@ -2,7 +2,7 @@ namespace DataClasses;
 
 public class DataRecord
 {
-    public string CarId { get; set; }
+    public string? CarId { get; set; }
     
     public double Speed { get; set; }
     
