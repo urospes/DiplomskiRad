@@ -23,6 +23,12 @@ spec:
           subPath: mosquitto.conf
         ports:
         - containerPort: 1883
+        resources:
+            limits:
+              memory: "128Mi"
+              cpu: "50m"
+            requests:
+              cpu: "10m"
       volumes:
         - name: mosquitto-config
           configMap:

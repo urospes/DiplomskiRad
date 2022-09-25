@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Streamiz.Kafka.Net;
 using Streamiz.Kafka.Net.SerDes;
@@ -22,7 +23,7 @@ namespace Utils
             };
         }
 
-        public static void Consume(string[] topics)
+        public static async Task Consume(string[] topics, IMongoDatabase db)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
             Console.CancelKeyPress += (_, e) => {
@@ -38,9 +39,13 @@ namespace Utils
                     while (true)
                     {
                         var consumedEvent = consumer.Consume(cts.Token);
-                        Console.WriteLine($"Event with key {consumedEvent.Message.Value} consumed...");
                         //... handle consume
-                        Console.WriteLine($"from topic : {consumedEvent.Topic}");
+                        var document = BsonDocument.Parse(consumedEvent.Message.Value);
+                        document.Add("defect", consumedEvent.Topic);
+                        Console.WriteLine(document.ToString());
+
+                        await db.GetCollection<BsonDocument>("defects").InsertOneAsync(document);
+                        Console.WriteLine("Wrote to mongo...");
                     }
                 }
                 catch (OperationCanceledException)

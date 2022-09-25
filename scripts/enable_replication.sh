@@ -14,4 +14,5 @@ do
   --remote-bucket-id $(kubectl exec $remotehost -- bash -c "influx bucket list | awk '/car_data/ {print \$1}'")  \
   --remote-id $(kubectl exec influxdb-0 -- bash -c "influx remote list | awk '/$remotename/ {print \$1}'")"
 done
+
 read -p "Press any key to exit..." x

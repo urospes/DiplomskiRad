@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 public static class DataGen 
 {
-    private static int INTERVAL_MS = 1000;
+    private static int INTERVAL_MS = 100;
     private static string SENSOR_DATA_TOPIC = "sensor_data_topic";
     private static string MQTT_URL = "app-mosquitto.com";
 

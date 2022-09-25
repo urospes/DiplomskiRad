@@ -2,7 +2,7 @@ using Confluent.Kafka;
 using MongoDB.Driver;
 using Utils;
 
-const string MONGODB_URL = "mongodb://mongodb-0.mongodb-headless.default.svc.cluster.local:27017";
+const string MONGODB_URL = "mongodb://mongodb-data-0.mongodb-data-headless.default.svc.cluster.local:27017";
 string[] KAFKA_DEFECT_TOPICS = new string[2] { "batteryPercentage_topic", "overheating_topic" };
 
 try
@@ -11,22 +11,14 @@ try
     var defectsDatabase = mongoClient.GetDatabase("defectsDatabase");
     try
     {
-        await defectsDatabase.CreateCollectionAsync("low_battery");
+        await defectsDatabase.CreateCollectionAsync("defects");
     }
     catch(Exception)
     {
-        Console.WriteLine("Collection 'low-battery' already exists. Skiping creation...");
-    }
-    try
-    {
-        await defectsDatabase.CreateCollectionAsync("overheating");
-    }
-    catch (Exception)
-    {
-        Console.WriteLine("Collection 'overheating' already exists. Skiping creation...");
+        Console.WriteLine("Collection 'defects' already exists. Skiping creation...");
     }
 
-    KafkaHelper.Consume(KAFKA_DEFECT_TOPICS);
+    await KafkaHelper.Consume(KAFKA_DEFECT_TOPICS, defectsDatabase);
 }
 catch(Exception e)
 {
