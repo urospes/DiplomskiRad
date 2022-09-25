@@ -2,7 +2,7 @@
 {
     public enum FilterFieldEnum
     {
-        speed,
-        batteryPercentage
+        batteryPercentage,
+        overheating
     }
 }

@@ -1,0 +1,7 @@
+architecture: replicaset
+fullnameOverride: mongodb
+replicaCount: 2
+auth:
+  enabled: false
+global:
+  storageClass: mongodb-storage

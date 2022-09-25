@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Streamiz.Kafka.Net;
 using Streamiz.Kafka.Net.SerDes;
 using Streamiz.Kafka.Net.Stream;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Utils;
 
@@ -79,36 +80,44 @@ public static class KafkaHelper
         }
     }
 
-
-    private static async Task ConfigureKafkaStream(string inputTopic, string outputTopic, FilterFieldEnum filterField)
+    public static async Task ConfigureKafkaStreams(string inputTopic)
     {
-        await CreateTopic(outputTopic, 1, 1);
         var streamBuilder = new StreamBuilder();
-        streamBuilder.Stream<string, string>(inputTopic)
-                                   .Filter((key, value) => FilterStream(key, value, filterField))
-                                   .To(outputTopic);
+
+        var inputStream = streamBuilder.Stream<string, string>(inputTopic);
+
+
+        foreach (var filterField in (FilterFieldEnum[])Enum.GetValues(typeof(FilterFieldEnum)))
+        {
+            string outputTopic = $"{filterField}_topic";
+            await CreateTopic(outputTopic, 1, 1);
+
+            inputStream.Filter((key, value) => FilterStream(key, value, filterField))
+                       .To(outputTopic);
+        }
 
         Topology t = streamBuilder.Build();
         KafkaStream stream = new KafkaStream(t, _streamConfig);
         await stream.StartAsync();
     }
 
-    public static async Task ConfigureKafkaStreams(string inputTopic)
-    {
-        foreach (var filterField in (FilterFieldEnum[])Enum.GetValues(typeof(FilterFieldEnum)))
-        {
-            Console.WriteLine(filterField);
-            await ConfigureKafkaStream(inputTopic, $"{filterField}_topic", filterField);
-        }
-    }
-
 
     public static bool FilterStream(string key, string value, FilterFieldEnum filterField)
     {
-        Console.WriteLine("Evo me radim nesto bar");
         var record = JsonConvert.DeserializeObject<DataRecord>(value);
         if (record == null)
             return false;
-        return record.Speed > 8.0;
+        Console.WriteLine("u funkciji" + filterField);
+        switch (filterField)
+        {
+            case FilterFieldEnum.batteryPercentage:
+                Console.WriteLine("battery..." + record.BatteryPercentage);
+                return record.BatteryPercentage < 95;
+            case FilterFieldEnum.overheating:
+                Console.WriteLine("coolanty ..." + record.CoolantTemp);
+                return record.CoolantTemp > 100.0;
+            default:
+                return false;
+        }
     }
 }
