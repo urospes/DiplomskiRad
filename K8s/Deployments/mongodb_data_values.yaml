@@ -1,6 +1,6 @@
 architecture: replicaset
 fullnameOverride: mongodb-data
-replicaCount: 2
+replicaCount: 1
 auth:
   enabled: false
 global:
