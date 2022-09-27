@@ -7,5 +7,7 @@ namespace CarsServiceAPI.IServices
         public Task<List<CarDTO>> GetCars();
 
         public Task<CarDTO> GetCar(int carId);
+
+        public Task<CarDTO> GetCarWithDefects(int carId);
     }
 }

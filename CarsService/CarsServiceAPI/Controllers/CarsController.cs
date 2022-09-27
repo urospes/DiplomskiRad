@@ -19,15 +19,29 @@ namespace CarsServiceAPI.Controllers
         public async Task<IActionResult> GetCars()
         {
             var cars = await _CarsService.GetCars();
-            return Ok();
+            if(cars != null)
+                return Ok(cars);
+            return NotFound();
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetCar([FromRoute] int id)
         {
-            var cars = await _CarsService.GetCar(id);
-            return Ok();
+            var car = await _CarsService.GetCar(id);
+            if (car != null)
+                return Ok(car);
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("Defects/{id}")]
+        public async Task<IActionResult> GetCarWithDefects([FromRoute] int id)
+        {
+            var car = await _CarsService.GetCarWithDefects(id);
+            if (car != null)
+                return Ok(car);
+            return NotFound();
         }
     }
 }

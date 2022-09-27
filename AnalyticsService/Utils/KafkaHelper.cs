@@ -41,7 +41,7 @@ namespace Utils
                         var consumedEvent = consumer.Consume(cts.Token);
                         //... handle consume
                         var document = BsonDocument.Parse(consumedEvent.Message.Value);
-                        document.Add("defect", consumedEvent.Topic);
+                        document.Add("defect", consumedEvent.Topic.Split('_')[0]);
                         Console.WriteLine(document.ToString());
 
                         await db.GetCollection<BsonDocument>("defects").InsertOneAsync(document);

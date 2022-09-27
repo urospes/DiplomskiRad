@@ -2,6 +2,8 @@
 {
     public class CarData
     {
+        public string? DefectType { get; set; }
+
         public double Speed { get; set; }
 
         public double IntakeAirFlowSpeed { get; set; }

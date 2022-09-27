@@ -3,12 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsServiceAPI", "CarsServiceAPI\CarsServiceAPI.csproj", "{885B3416-CC73-48BF-91D8-2D2BFCC496ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsServiceAPI", "CarsServiceAPI\CarsServiceAPI.csproj", "{885B3416-CC73-48BF-91D8-2D2BFCC496ED}"
 EndProject
 Global
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -30,5 +27,11 @@ Global
 		{885B3416-CC73-48BF-91D8-2D2BFCC496ED}.Release|x64.Build.0 = Release|Any CPU
 		{885B3416-CC73-48BF-91D8-2D2BFCC496ED}.Release|x86.ActiveCfg = Release|Any CPU
 		{885B3416-CC73-48BF-91D8-2D2BFCC496ED}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43596D5D-D8CC-412C-B14B-4EB7E3CA859E}
 	EndGlobalSection
 EndGlobal

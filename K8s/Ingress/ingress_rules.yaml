@@ -35,3 +35,14 @@ spec:
                 name: cars-service
                 port:
                   number: 80
+    
+    - host: app-defects.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: defects-service
+                port:
+                  number: 80

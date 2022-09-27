@@ -31,7 +31,6 @@ const string MONGODB_URL = "mongodb://mongodb-cars-0.mongodb-cars-headless.defau
 
 try
 {
-    Console.WriteLine("evo me");
     MongoClient mongoClient = new MongoClient(MONGODB_URL);
     var carsDatabase = mongoClient.GetDatabase("carsDatabase");
     var carsCollection = carsDatabase.GetCollection<BsonDocument>("cars");
@@ -70,7 +69,7 @@ async Task PopulateCarsDatabase(IMongoCollection<BsonDocument> carsCollection)
     var car1 = new BsonDocument(car1Object);
     var car2Object = new List<BsonElement>()
     {
-        new BsonElement("carId", 0),
+        new BsonElement("carId", 1),
         new BsonElement("manufacturer", "Alfa Romeo"),
         new BsonElement("model", "GiuliaQV"),
         new BsonElement("year", 2018)

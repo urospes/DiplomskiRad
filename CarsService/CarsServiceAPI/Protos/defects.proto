@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "CarsServiceAPI.Protos";
+
+service DefectsRpcService {
+    rpc GetDefectsForCar (DefectsRpcRequest) returns (DefectsRpcResponse);
+}
+
+message DefectsRpcRequest {
+	int32 carId = 1;
+}
+
+message DefectRpcModel{
+	string DefectType = 1;
+    double Speed = 2;
+    double IntakeAirFlowSpeed = 3;
+    double BatteryPercentage = 4;
+    double EngineVibrationAmplitude = 5;
+    double Accelerometer11Value = 6;
+    double Accelerometer12Value = 7;
+    double Accelerometer21Value = 8;
+    double Accelerometer22Value = 9;
+    int32 TirePressure11 = 10;
+    int32 TirePressure12 = 11;
+    int32 TirePressure21 = 12;
+    int32 TirePressure22 = 13;
+    double CoolantTemp = 14;
+    double BatteryVoltage = 15;
+    double IntakeAirTemp = 16;
+    double CurrentDraw = 17;
+}
+
+message DefectsRpcResponse {
+    repeated DefectRpcModel defects = 1;
+}
