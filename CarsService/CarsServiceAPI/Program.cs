@@ -1,3 +1,5 @@
+using CarsServiceAPI.IServices;
+using CarsServiceAPI.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICarsService, CarsService>();
 
 var app = builder.Build();
 
@@ -18,7 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
@@ -72,7 +75,7 @@ async Task PopulateCarsDatabase(IMongoCollection<BsonDocument> carsCollection)
         new BsonElement("model", "GiuliaQV"),
         new BsonElement("year", 2018)
     };
-    var car2 = new BsonDocument(car1Object);
+    var car2 = new BsonDocument(car2Object);
 
     documents.Add(car1);
     documents.Add(car2);

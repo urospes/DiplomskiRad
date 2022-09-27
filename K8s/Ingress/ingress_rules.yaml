@@ -24,3 +24,14 @@ spec:
                 name: grafana-service
                 port:
                   number: 3000
+    
+    - host: app-gateway.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cars-service
+                port:
+                  number: 80

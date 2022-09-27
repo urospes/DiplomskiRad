@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "AnalyticsService";
+
+service GrpcCarsData {
+    rpc GetDataForCar (Request) returns (CarDataModel);
+}
+
+message Request {
+    int32 CarId = 1;
+}
+
+message CarDataModel {
+	double Speed = 1;
+    double IntakeAirFlowSpeed = 2;
+    double BatteryPercentage = 3;
+    double EngineVibrationAmplitude = 4;
+    double Accelerometer11Value = 5;
+    double Accelerometer12Value = 6;
+    double Accelerometer21Value = 7;
+    double Accelerometer22Value = 8;
+}
