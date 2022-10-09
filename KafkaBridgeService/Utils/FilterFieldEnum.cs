@@ -3,6 +3,9 @@
     public enum FilterFieldEnum
     {
         batteryPercentage,
-        overheating
+        overheating,
+        engineVibrations,
+        tireFailure,
+        chassis
     }
 }

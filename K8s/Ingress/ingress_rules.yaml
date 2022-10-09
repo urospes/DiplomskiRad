@@ -4,7 +4,7 @@ metadata:
   name: app-ingress
 spec:
   rules:
-    - host: app-mosquitto.com
+    - host: mosquitto.cartracker.com
       http:
         paths:
           - path: /
@@ -14,7 +14,7 @@ spec:
                 name: mosquitto-service
                 port:
                   number: 1883
-    - host: app-grafana.com
+    - host: grafana.cartracker.com
       http:
         paths:
           - path: /
@@ -25,24 +25,13 @@ spec:
                 port:
                   number: 3000
     
-    - host: app-gateway.com
+    - host: api.cartracker.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: cars-service
-                port:
-                  number: 80
-    
-    - host: app-defects.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: defects-service
+                name: gateway-service
                 port:
                   number: 80

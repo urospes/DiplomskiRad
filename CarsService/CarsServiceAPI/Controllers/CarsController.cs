@@ -1,6 +1,7 @@
 ﻿using CarsServiceAPI.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson.IO;
 
 namespace CarsServiceAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace CarsServiceAPI.Controllers
         public async Task<IActionResult> GetCars()
         {
             var cars = await _CarsService.GetCars();
+            Console.WriteLine(cars.Count);
             if(cars != null)
                 return Ok(cars);
             return NotFound();

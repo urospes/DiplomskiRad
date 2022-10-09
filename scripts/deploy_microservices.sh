@@ -19,6 +19,7 @@ kubectl apply -f grafana_deployment.yaml
 kubectl apply -f analytics_deployment.yaml
 kubectl apply -f cars_deployment.yaml
 kubectl apply -f defects_deployment.yaml
+kubectl apply -f gateway_deployment.yaml
 cd ../Ingress
 kubectl apply -f ingress_rules.yaml
 read -p "Press any key to exit..." x

@@ -111,11 +111,21 @@ public static class KafkaHelper
         switch (filterField)
         {
             case FilterFieldEnum.batteryPercentage:
-                Console.WriteLine("battery..." + record.BatteryPercentage);
-                return record.BatteryPercentage < 95;
+                return record.BatteryPercentage < 90;
             case FilterFieldEnum.overheating:
-                Console.WriteLine("coolanty ..." + record.CoolantTemp);
-                return record.CoolantTemp > 100.0;
+                return record.CoolantTemp > 370.0;
+            case FilterFieldEnum.engineVibrations:
+                return record.EngineVibrationAmplitude > 1400.0;
+            case FilterFieldEnum.tireFailure:
+                return !(record.TirePressure11 <= 35 && record.TirePressure11 >= 31 &&
+                         record.TirePressure12 <= 35 && record.TirePressure12 >= 31 &&
+                         record.TirePressure21 <= 35 && record.TirePressure21 >= 31 &&
+                         record.TirePressure22 <= 35 && record.TirePressure22 >= 31);
+            case FilterFieldEnum.chassis:
+                return !(record.Accelerometer11Value < 3.8 &&
+                         record.Accelerometer12Value < 3.8 &&
+                         record.Accelerometer21Value < 3.8 &&
+                         record.Accelerometer22Value < 3.8);
             default:
                 return false;
         }

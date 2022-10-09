@@ -76,8 +76,18 @@ async Task PopulateCarsDatabase(IMongoCollection<BsonDocument> carsCollection)
     };
     var car2 = new BsonDocument(car2Object);
 
+    var car3Object = new List<BsonElement>()
+    {
+        new BsonElement("carId", 2),
+        new BsonElement("manufacturer", "Fiat"),
+        new BsonElement("model", "Punto"),
+        new BsonElement("year", 2001)
+    };
+    var car3 = new BsonDocument(car3Object);
+
     documents.Add(car1);
     documents.Add(car2);
+    documents.Add(car3);
     await carsCollection.InsertManyAsync(documents);
 }
 
