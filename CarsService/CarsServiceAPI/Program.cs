@@ -2,6 +2,7 @@ using CarsServiceAPI.IServices;
 using CarsServiceAPI.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,10 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseHttpMetrics();
 
 app.UseAuthorization();
 
@@ -90,5 +95,9 @@ async Task PopulateCarsDatabase(IMongoCollection<BsonDocument> carsCollection)
     documents.Add(car3);
     await carsCollection.InsertManyAsync(documents);
 }
+
+app.UseEndpoints(endpoints => {
+    endpoints.MapMetrics();
+});
 
 app.Run();

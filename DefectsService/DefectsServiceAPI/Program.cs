@@ -1,5 +1,6 @@
 using DefectsServiceAPI.IServices;
 using DefectsServiceAPI.Services;
+using Prometheus;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,9 +37,16 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseHttpMetrics();
+
 app.UseAuthorization();
 
 app.MapControllers();
 app.MapGrpcService<GrpcService>();
+app.UseEndpoints(endpoints => {
+    endpoints.MapMetrics();
+});
 
 app.Run();
