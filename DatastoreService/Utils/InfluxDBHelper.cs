@@ -25,6 +25,20 @@ public static class InfluxDBHelper
                         Value = data.Speed
                     };
                     writeApi.WriteMeasurement(speedMeasurement, WritePrecision.Ns, BUCKET, ORG);
+
+                    var throttleMeasurement = new ThrottleMeasurement
+                    {
+                        CarId = data.CarId,
+                        Value = data.ThrottlePos
+                    };
+                    writeApi.WriteMeasurement(throttleMeasurement, WritePrecision.Ns, BUCKET, ORG);
+
+                    var currentDrawMeasurement = new CurrentDrawMeasurement
+                    {
+                        CarId = data.CarId,
+                        Value = data.CurrentDraw
+                    };
+                    writeApi.WriteMeasurement(currentDrawMeasurement, WritePrecision.Ns, BUCKET, ORG);
                 }
                 influxDBClient.Dispose();
             }

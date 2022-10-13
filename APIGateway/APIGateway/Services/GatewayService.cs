@@ -27,5 +27,22 @@ namespace APIGateway.Services
                 return JsonConvert.DeserializeObject<List<CarDTO>>(responseContent);
             }
         }
+
+        public async Task<CarDTO> GetCarWithDefects(int id)
+        {
+            var httpClient = _HttpClientFactory.CreateClient("CarsHttpClient");
+
+            using(var response = await httpClient.GetAsync(httpClient.BaseAddress + $"Cars/Defects/{id}"))
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseContent);
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                Console.WriteLine(responseContent);
+                return JsonConvert.DeserializeObject<CarDTO>(responseContent);
+            }
+        }
     }
 }

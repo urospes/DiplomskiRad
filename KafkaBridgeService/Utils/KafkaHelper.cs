@@ -107,25 +107,25 @@ public static class KafkaHelper
         var record = JsonConvert.DeserializeObject<DataRecord>(value);
         if (record == null)
             return false;
-        Console.WriteLine("u funkciji" + filterField);
+
         switch (filterField)
         {
             case FilterFieldEnum.batteryPercentage:
-                return record.BatteryPercentage < 90;
+                return record.BatteryPercentage < 0;
             case FilterFieldEnum.overheating:
-                return record.CoolantTemp > 370.0;
+                return record.CoolantTemp > 3700.0;
             case FilterFieldEnum.engineVibrations:
-                return record.EngineVibrationAmplitude > 1400.0;
+                return record.EngineVibrationAmplitude > 5000.0;
             case FilterFieldEnum.tireFailure:
-                return !(record.TirePressure11 <= 35 && record.TirePressure11 >= 31 &&
-                         record.TirePressure12 <= 35 && record.TirePressure12 >= 31 &&
-                         record.TirePressure21 <= 35 && record.TirePressure21 >= 31 &&
-                         record.TirePressure22 <= 35 && record.TirePressure22 >= 31);
+                return !(record.TirePressure11 <= 35 && record.TirePressure11 >= 30 &&
+                         record.TirePressure12 <= 35 && record.TirePressure12 >= 30 &&
+                         record.TirePressure21 <= 35 && record.TirePressure21 >= 30 &&
+                         record.TirePressure22 <= 35 && record.TirePressure22 >= 30);
             case FilterFieldEnum.chassis:
-                return !(record.Accelerometer11Value < 3.8 &&
-                         record.Accelerometer12Value < 3.8 &&
-                         record.Accelerometer21Value < 3.8 &&
-                         record.Accelerometer22Value < 3.8);
+                return !(record.Accelerometer11Value < 4.0 &&
+                         record.Accelerometer12Value < 4.0 &&
+                         record.Accelerometer21Value < 4.0 &&
+                         record.Accelerometer22Value < 4.0);
             default:
                 return false;
         }

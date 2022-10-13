@@ -17,7 +17,7 @@ namespace DefectsServiceAPI.Services
             try
             {
                 var filter = Builders<BsonDocument>.Filter.Eq("CarId", carId);
-                var defects = await (await _DefectsCollection.FindAsync(filter)).ToListAsync();
+                var defects = await _DefectsCollection.Find(filter).Limit(10).ToListAsync();
 
                 var defectDTOs = new List<DefectDTO>();
                 foreach(var defect in defects)

@@ -10,6 +10,6 @@
 
         public int Year { get; set; }
 
-        public virtual List<CarDefect> Defects { get; set; }
+        public virtual List<CarDefect> Data { get; set; }
     }
 }

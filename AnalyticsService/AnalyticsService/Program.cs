@@ -3,7 +3,8 @@ using MongoDB.Driver;
 using Utils;
 
 const string MONGODB_URL = "mongodb://mongodb-data-0.mongodb-data-headless.default.svc.cluster.local:27017";
-string[] KAFKA_DEFECT_TOPICS = new string[2] { "batteryPercentage_topic", "overheating_topic" };
+string[] KAFKA_DEFECT_TOPICS = new string[5] { "batteryPercentage_topic", "overheating_topic", "engineVibrations_topic",
+    "tireFailure_topic", "chassis_topic" };
 
 try
 {
