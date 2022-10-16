@@ -1,3 +1,29 @@
 prometheus:
   url: http://prometheus-operated.monitoring.svc
   port: 9090
+rules:
+  custom:
+  - seriesQuery: 'broker_publish_messages_received{namespace!="",pod!=""}'
+    resources:
+      overrides:
+        namespace:
+          resource: namespace
+        pod:
+          resource: pod
+    name:
+      matches: "^(.*)_received"
+      as: "${1}_per_sec"
+    metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
+
+  external:
+  - seriesQuery: 'broker_publish_messages_received{namespace!="",pod!=""}'
+    resources:
+      overrides:
+        namespace:
+          resource: namespace
+        pod:
+          resource: pod
+    name:
+      matches: "^(.*)_received"
+      as: "${1}_per_sec"
+    metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'

@@ -15,6 +15,18 @@ spec:
         app: mosquitto
     spec:
       containers:
+      - name: mqtt-exporter
+        image: sapcc/mosquitto-exporter
+        env:
+        - name: BROKER_ENDPOINT
+          value: tcp://localhost:1883
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9234
+
       - name: mosquitto
         image: eclipse-mosquitto:latest
         volumeMounts:
@@ -38,6 +50,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mosquitto-service
+  labels:
+    app: mosquitto-service
 spec:
   selector:
     app: mosquitto
@@ -45,3 +59,8 @@ spec:
     - protocol: TCP
       port: 1883
       targetPort: 1883
+      name: nebitno
+    - protocol: TCP
+      port: 9234
+      targetPort: 9234
+      name: exporter-port

@@ -38,6 +38,8 @@ app.UseRouting();
 
 app.UseHttpMetrics();
 
+builder.Services.AddSystemMeti
+
 app.UseAuthorization();
 
 app.MapControllers();

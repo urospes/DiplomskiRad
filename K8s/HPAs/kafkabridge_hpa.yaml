@@ -1,18 +1,17 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: mosquitto-hpa
+  name: kafkabridge-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: mosquitto-deployment
+    name: kafka-bridge-deployment
   minReplicas: 1
   maxReplicas: 3
-  #targetCPUUtilizationPercentage: 50
   metrics:
-  - type: Pods
-    pods:
+  - type: External
+    external:
       metric:
         name: broker_publish_messages_per_sec
       target:
