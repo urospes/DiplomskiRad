@@ -44,5 +44,17 @@ namespace APIGateway.Services
                 return JsonConvert.DeserializeObject<CarDTO>(responseContent);
             }
         }
+
+        public async Task<bool> AddCar(CarWriteDTO car)
+        {
+            var httpClient = _HttpClientFactory.CreateClient("CarsHttpClient");
+            var content = JsonContent.Create<CarWriteDTO>(car);
+            Console.WriteLine(car);
+
+            using (var response = await httpClient.PostAsync(httpClient.BaseAddress + "Cars", content))
+            {
+                return response.IsSuccessStatusCode;
+            }
+        }
     }
 }

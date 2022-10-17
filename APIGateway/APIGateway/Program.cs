@@ -1,6 +1,8 @@
 using APIGateway.IServices;
 using APIGateway.Services;
 using Prometheus;
+using Polly.Extensions.Http;
+using Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +16,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient("CarsHttpClient", client =>
 {
     client.BaseAddress = new Uri("http://cars-service");
-}).SetHandlerLifetime(TimeSpan.FromMinutes(5));
+}).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+  .AddPolicyHandler(HttpPolicyExtensions.HandleTransientHttpError().RetryAsync())
+  .AddPolicyHandler(HttpPolicyExtensions.HandleTransientHttpError().CircuitBreakerAsync(3, TimeSpan.FromSeconds(30)));
 
 builder.Services.AddHttpClient("DefectsHttpClient", client =>
 {
     client.BaseAddress = new Uri("http://defects-service");
-}).SetHandlerLifetime(TimeSpan.FromMinutes(5));
+}).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+  .AddPolicyHandler(HttpPolicyExtensions.HandleTransientHttpError().RetryAsync())
+  .AddPolicyHandler(HttpPolicyExtensions.HandleTransientHttpError().CircuitBreakerAsync(3, TimeSpan.FromSeconds(30)));
 
 builder.Services.AddScoped<IGatewayService, GatewayService>();
 
@@ -37,8 +43,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseHttpMetrics();
-
-builder.Services.AddSystemMeti
 
 app.UseAuthorization();
 

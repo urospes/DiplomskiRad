@@ -9,5 +9,7 @@ namespace CarsServiceAPI.IServices
         public Task<CarDTO> GetCar(int carId);
 
         public Task<CarDTO> GetCarWithDefects(int carId);
+
+        public Task<bool> AddCar(CarWriteDTO car);
     }
 }

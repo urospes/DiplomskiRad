@@ -8,7 +8,7 @@ namespace CarsServiceAPI.Services
 {
     public class CarsService : ICarsService
     {
-        private static string MONGODB_URL = "mongodb://mongodb-cars-0.mongodb-cars-headless.default.svc.cluster.local:27017";
+        private static string MONGODB_URL = "mongodb://mongodb-cars-headless.default.svc.cluster.local:27017";
         private static readonly MongoClient _MongoClient = new MongoClient(MONGODB_URL);
         private static readonly IMongoDatabase _Database = _MongoClient.GetDatabase("carsDatabase");
         private static readonly IMongoCollection<BsonDocument> _CarsCollection = _Database.GetCollection<BsonDocument>("cars");
@@ -92,6 +92,27 @@ namespace CarsServiceAPI.Services
             }
 
             return carDTO;
+        }
+
+        public async Task<bool> AddCar(CarWriteDTO car)
+        {
+            try
+            {
+                Console.WriteLine("evo meee");
+                var bsonCar = car.ToBsonDocument();
+                Console.WriteLine(bsonCar);
+
+                if (bsonCar == null)
+                    return false;
+
+                await _CarsCollection.InsertOneAsync(bsonCar);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

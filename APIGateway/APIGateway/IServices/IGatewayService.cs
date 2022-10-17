@@ -7,5 +7,7 @@ namespace APIGateway.IServices
         public Task<List<CarDTO>> GetCars();
 
         public Task<CarDTO> GetCarWithDefects(int id);
+
+        public Task<bool> AddCar(CarWriteDTO car);
     }
 }

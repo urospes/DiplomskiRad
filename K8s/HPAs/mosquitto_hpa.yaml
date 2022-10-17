@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: mosquitto-deployment
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 2
   #targetCPUUtilizationPercentage: 50
   metrics:
   - type: Pods
