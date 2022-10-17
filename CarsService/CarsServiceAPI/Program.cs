@@ -36,22 +36,29 @@ const string MONGODB_URL = "mongodb://mongodb-cars-0.mongodb-cars-headless.defau
 
 
 MongoClient mongoClient = new MongoClient(MONGODB_URL);
-var carsDatabase = mongoClient.GetDatabase("carsDatabase");
-var carsCollection = carsDatabase.GetCollection<BsonDocument>("cars");
-if (carsCollection == null)
+try
 {
-    Console.WriteLine("Collection doesn't exist...");
-    await carsDatabase.CreateCollectionAsync("cars");
-    carsCollection = carsDatabase.GetCollection<BsonDocument>("cars");
+    var carsDatabase = mongoClient.GetDatabase("carsDatabase");
+    var carsCollection = carsDatabase.GetCollection<BsonDocument>("cars");
+    if (carsCollection == null)
+    {
+        Console.WriteLine("Collection doesn't exist...");
+        await carsDatabase.CreateCollectionAsync("cars");
+        carsCollection = carsDatabase.GetCollection<BsonDocument>("cars");
 
-    await PopulateCarsDatabase(carsCollection);
-}
-else
-{
-    var documentCount = await carsCollection.CountDocumentsAsync(new BsonDocument());
-
-    if (documentCount == 0)
         await PopulateCarsDatabase(carsCollection);
+    }
+    else
+    {
+        var documentCount = await carsCollection.CountDocumentsAsync(new BsonDocument());
+
+        if (documentCount == 0)
+            await PopulateCarsDatabase(carsCollection);
+    }
+}
+catch(Exception e)
+{
+    Console.WriteLine(e.Message);
 }
 
 async Task PopulateCarsDatabase(IMongoCollection<BsonDocument> carsCollection)
