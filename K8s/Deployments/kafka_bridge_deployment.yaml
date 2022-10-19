@@ -25,6 +25,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+      initContainers:
+      - name: init-mosquitto
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup mosquitto-deployment-${HOSTNAME##*-}.mosquitto-headless.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do sleep 1; done"]
 ---
 apiVersion: v1
 kind: Service
